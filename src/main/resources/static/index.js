@@ -21,27 +21,28 @@ angular.module('market', []).controller('indexController', function ($scope, $ht
             });
     }
 
-    $scope.fillTableBasket = function () {
-        $http.get('http://localhost:8189/market/basket/get/')
+    $scope.loadBasket = function () {
+        $http.get('http://localhost:8189/market/api/v1/basket/')
             .then(function (response) {
-                $scope.baskets = response.data;
+                $scope.basket = response.data;
+
             });
     };
 
-    $scope.addToBasket = function () {
-        $http.post('http://localhost:8189/market/basket/addOne"', $scope.newProductToBasket)
+    $scope.addToBasket = function (productId) {
+        $http.get('http://localhost:8189/market/api/v1/basket/add/' + productId)
             .then(function (response) {
-                $scope.newProductToBasket = null;
-                $scope.fillTableBasket();
+                alert(response.data.title);
             });
     }
 
-    $scope.deleteFromBasket = function () {
+/*    $scope.deleteFromBasket = function () {
         $http.delete('http://localhost:8189/market/basket/delete/')
             .then(function (response) {
-                $scope.fillTableBasket();
+                $scope.loadBasket();
             });
-    }
+    }*/
 
     $scope.fillTableProducts();
+    $scope.loadBasket();
 });

@@ -10,7 +10,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
     <script src="index.js"></script>
-    <script src="basket.js"></script>
 </head>
 
 <body>
@@ -29,7 +28,7 @@
             <td>Цена</td>
             <td></td>
             <td></td>
-            <td></td>
+<!--            <td></td>-->
         </tr>
         </thead>
         <tbody>
@@ -41,11 +40,11 @@
                 <button class="btn btn-danger" ng-click="deleteProduct(p.id)">Удалить</button>
             </td>
             <td>
-                <button class="btn btn-default btn-sm" ng-click="addToBasket()">Add to basket</button>
+                <button class="btn btn-primary" ng-click="addToBasket(p.id)">Add to basket</button>
             </td>
-            <td>
+<!--            <td>
                 <button class="btn btn-danger" ng-click="deleteFromBasket()">Delete from basket</button>
-            </td>
+            </td>-->
         </tr>
         </tbody>
     </table>
@@ -69,21 +68,21 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <td>ID</td>
             <td>Название</td>
+            <td>Количество</td>
             <td>Цена</td>
             <td></td>
-            <td></td>
+<!--            <td></td>-->
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="p in basket">
-            <td>{{p.id}}</td>
-            <td>{{p.title}}</td>
-            <td>{{p.price}}</td>
-            <td>
+        <tr ng-repeat="i in basket.items">
+            <td>{{i.productTitle}}</td>
+            <td>{{i.quantity}}</td>
+            <td>{{i.pricePerProduct + ' x ' + i.quantity + ' = ' i.price}}</td>
+<!--            <td>
                 <button class="btn btn-danger" ng-click="deleteFromBasket()">Delete from basket</button>
-            </td>
+            </td>-->
         </tr>
         </tbody>
     </table>
