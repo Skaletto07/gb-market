@@ -1,4 +1,4 @@
-package ru.geekbrains.march.market.entities;
+package ru.geekbrains.march.market.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,5 +19,10 @@ public class BasketItem {
     public void incrementQuantity() {
         quantity++;
         price = price.add(pricePerProduct);
+    }
+    public void changeQuantity(int delta) {
+        quantity += delta;
+        price = pricePerProduct.multiply(BigDecimal.valueOf(quantity));
+
     }
 }

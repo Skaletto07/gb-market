@@ -2,11 +2,8 @@ package ru.geekbrains.march.market.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.geekbrains.march.market.entities.Basket;
-import ru.geekbrains.march.market.entities.Product;
+import ru.geekbrains.march.market.model.Basket;
 import ru.geekbrains.march.market.services.BasketService;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -23,5 +20,15 @@ public class BasketController {
     @GetMapping("/add/{productID}")
     public void addProductToBasket(@PathVariable long productID) {
         basketService.addToCart(productID);
+    }
+
+    @GetMapping("/clear")
+    public void clearBasket() {
+        basketService.clear();
+    }
+
+    @GetMapping("/remove/{id}")
+    public void removeBasket(@PathVariable long id) {
+        basketService.remove(id);
     }
 }

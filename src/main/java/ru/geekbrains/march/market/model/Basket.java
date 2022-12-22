@@ -1,6 +1,7 @@
-package ru.geekbrains.march.market.entities;
+package ru.geekbrains.march.market.model;
 
 import lombok.Data;
+import ru.geekbrains.march.market.entities.Product;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -31,6 +32,12 @@ public class Basket {
         BasketItem cartItem = new BasketItem(product.getId(), product.getTitle(), 1, product.getPrice(), product.getPrice());
         items.add(cartItem);
         recalculate();
+    }
+
+    public void remove(long id) {
+        if(items.removeIf(basketItem -> basketItem.getProductId().equals(id))) {
+            recalculate();
+        }
     }
 
     public void clear() {
