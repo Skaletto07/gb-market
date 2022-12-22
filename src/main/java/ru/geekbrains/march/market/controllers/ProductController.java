@@ -3,7 +3,7 @@ package ru.geekbrains.march.market.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.geekbrains.march.market.dtos.CreateNewProductDto;
+import ru.geekbrains.march.market.dtos.ProductDto;
 import ru.geekbrains.march.market.entities.Product;
 import ru.geekbrains.march.market.services.ProductService;
 
@@ -22,8 +22,8 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createNewProducts(@RequestBody CreateNewProductDto createNewProductDto) {
-        productService.createNewProduct(createNewProductDto);
+    public void createNewProducts(@RequestBody ProductDto productDto) {
+        productService.createNewProduct(productDto);
     }
 
     @DeleteMapping("/{id}")

@@ -1,29 +1,32 @@
 package ru.geekbrains.march.market.services;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import ru.geekbrains.march.market.entities.Basket;
 import ru.geekbrains.march.market.entities.Product;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-@Component
+@Service
 public class BasketService {
-    private final List<Product> basketOfProducts = new ArrayList<>();
+    private Basket basket;
+    private final ProductService service;
 
-    public List<Product> getProducts() {
-        return basketOfProducts;
+    public BasketService(ProductService service) {
+        this.service = service;
     }
 
-    public void addProduct(Product product) {
-        basketOfProducts.add(product);
+    @PostConstruct
+    public void init() {
+        basket = new Basket();
     }
 
-    public void addProducts(Product... products) {
-        basketOfProducts.addAll(Arrays.asList(products));
+    public Basket getBasket() {
+        return basket;
     }
 
-    public void deleteProductFromBasket(Product product) {
-        basketOfProducts.remove(product);
+    public void addToCart(Long productId) {
+        Product product = service.findById(productId).orElseThrow(() -> new RuntimeException("Не удается добавать в корзину"));
+        basket.add(product);
     }
 }
